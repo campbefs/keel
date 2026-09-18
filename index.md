@@ -18,7 +18,7 @@ cart drops back under, the gift comes out again.
 <p class="cta-note">$19 a month. 14 days free. No theme edits.</p>
 
 <figure markdown="1">
-![A Shopify cart line for Alpine Trail Wax showing $14.00 struck through beside $0.00, tagged "Free gift with your order".]({{ '/assets/img/gift-line.png' | relative_url }}){: width="1112" height="130" }
+![A Shopify cart line for Alpine Trail Wax showing $14.00 struck through beside $0.00, tagged "Free gift with your order".]({{ '/assets/img/gift-line.png' | relative_url }}){: width="452" height="130" }
 <figcaption>A $14.00 gift at $0.00, in the merchant's own theme.</figcaption>
 </figure>
 
