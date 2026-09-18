@@ -27,8 +27,16 @@ plugins:
 
 # Open Graph / Twitter preview. Without this a shared link renders as a blank card.
 # 1200x630 is the size both platforms show uncropped.
-image: /assets/img/social-card.png
+#
+# A bare site-level `image:` does NOT work -- measured: jekyll-seo-tag emitted no og:image at all
+# with it set that way. It reads `page.image`, so the default has to be applied per-page through
+# `defaults` below. And twitter.card must be set explicitly or it stays "summary", which renders
+# a thumbnail rather than the full card.
+twitter:
+  card: summary_large_image
 
 defaults:
+  - scope: { path: "" }
+    values: { image: /assets/img/social-card.png }
   - scope: { path: "notes" }
     values: { section: notes }
