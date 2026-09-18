@@ -1,0 +1,12 @@
+# One flat nav tier, defined once so the header and footer cannot drift apart.
+# `section` lets a child page (an app, a note) mark its parent as current.
+# NN/g calls the "7 plus or minus 2" nav-item rule a myth -- item count follows the content.
+- label: Apps
+  url: /apps/
+  section: apps
+- label: Notes
+  url: /notes/
+  section: notes
+- label: Contact
+  url: /contact/
+  section: contact

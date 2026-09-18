@@ -1,0 +1,30 @@
+title: Keel
+description: Keel builds Shopify apps by building the production line first. One app live, one in build, and the field notes from both.
+lang: en
+
+# REQUIRED here, and this is the case the usual warning does not cover. The site serves from
+# campbefs.github.io/keel -- a PROJECT page at a subpath, not a custom domain at /. Without
+# baseurl every root-relative link resolves one level too high and 404s. Every internal href in
+# the layout goes through Jekyll's `relative_url` filter for the same reason.
+# If a custom domain is ever bought, BOTH of these come out.
+url: https://campbefs.github.io
+baseurl: /keel
+
+# jekyll-readme-index and jekyll-optional-front-matter are default-ON and cannot be disabled, so a
+# folder's README.md silently becomes that folder's live page. Exclude by EXACT PATH -- never by
+# folder, because `exclude` only skips conversion and a folder exclusion would 404 every asset in
+# it.
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+
+# Only plugins on GitHub's pinned allowlist (pages.github.com/versions.json). Anything outside it
+# fails SILENTLY on their runner.
+plugins:
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+defaults:
+  - scope: { path: "notes" }
+    values: { section: notes }

@@ -1,0 +1,389 @@
+/* Giftline site tokens.
+   Every value here comes from `web-design-system`, not from habit. Ratios were recomputed with
+   the WCAG relative-luminance formula (sRGB -> linear, 0.2126R + 0.7152G + 0.0722B) rather than
+   copied or eyeballed -- the skill is explicit that a remembered ratio is not a measured one.
+
+   ONE SATURATED COLOUR, SPENT ON FUNCTION. Links only. Everything else is neutral. A palette can
+   pass AAA and still read as lifeless: desaturating raises contrast for free and is exactly what
+   kills it, so the green is kept saturated at a contrast tier it already clears.
+
+   Measured against surface #FBF9F5:
+     text-primary   #1A1917  16.71:1  AAA
+     text-secondary #474340   9.31:1  AAA
+     text-muted     #6E6862   5.23:1  AA
+     rule-strong    #8C857C   3.47:1  >= 3:1, meaningful non-text (SC 1.4.11)
+     link           #0F5C3F   7.61:1  AAA
+*/
+:root {
+  --surface: #fbf9f5;
+  --surface-alt: #f3f0ea;
+
+  --text-primary: #1a1917;
+  --text-secondary: #474340;
+  --text-muted: #6e6862;
+
+  --rule: #e4e0d8;        /* decorative hairline only */
+  --rule-strong: #8c857c; /* meaningful: table header rule, focus ring, code border */
+
+  --accent: #0f5c3f;
+  --link: #0f5c3f;
+
+  /* Modular scale 1.333 (perfect fourth): 4 steps plus one down-step. */
+  --step--1: 0.75rem;
+  --step-0: 1rem;
+  --step-1: 1.333rem;
+  --step-2: 1.777rem;
+  --step-3: 2.369rem;
+  --step-4: 3.157rem;
+
+  /* 8px base. Steps: 4 8 12 16 24 32 48 64 96. */
+  --sp-1: 0.25rem; --sp-2: 0.5rem;  --sp-3: 0.75rem; --sp-4: 1rem;
+  --sp-6: 1.5rem;  --sp-8: 2rem;    --sp-12: 3rem;   --sp-16: 4rem; --sp-24: 6rem;
+
+  /* Measure as a CHARACTER count, never a rem guess -- a rem number does not map to one. */
+  --measure-max: 72ch;
+  --measure-min: 45ch;
+
+  --font-serif: ui-serif, Georgia, "Iowan Old Style", Palatino, serif;
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, monospace;
+}
+
+/* DARK: each role RE-DERIVED against #121212, not inverted. text-primary is #E6E3DE, never
+   #fff -- pure white on near-black vibrates.
+     text-primary   #E6E3DE  14.64:1  AAA
+     text-secondary #B3AEA7   8.50:1  AAA
+     text-muted     #8B857D   5.13:1  AA
+     rule-strong    #6E685F   3.40:1  >= 3:1  (an earlier #5C574F measured 2.61:1 and FAILED)
+     link           #4FB286   7.18:1  AAA
+*/
+@media (prefers-color-scheme: dark) {
+  :root {
+    --surface: #121212;
+    --surface-alt: #1c1c1c;
+    --text-primary: #e6e3de;
+    --text-secondary: #b3aea7;
+    --text-muted: #8b857d;
+    --rule: #2e2e2e;
+    --rule-strong: #6e685f;
+    --accent: #4fb286;
+    --link: #4fb286;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--surface);
+  color: var(--text-primary);
+  font-family: var(--font-serif);
+  font-size: var(--step-0);
+  line-height: 1.6;
+  -webkit-text-size-adjust: 100%;
+}
+
+header.site, footer.site, main {
+  max-width: var(--measure-max);
+  margin-inline: auto;
+  padding-inline: var(--sp-4);
+}
+
+header.site {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2) var(--sp-6);
+  align-items: baseline;
+  justify-content: space-between;
+  padding-block: var(--sp-8) var(--sp-4);
+  border-bottom: 1px solid var(--rule);
+  font-family: var(--font-sans);
+}
+.brand {
+  font-weight: 700;
+  font-size: var(--step-1);
+  text-decoration: none;
+  color: var(--text-primary);
+}
+header.site nav { display: flex; gap: var(--sp-6); font-size: var(--step--1); }
+
+main { padding-block: var(--sp-12) var(--sp-24); }
+
+h1, h2, h3 {
+  font-family: var(--font-sans);
+  line-height: 1.2;
+  text-wrap: balance;
+  margin-block: var(--sp-12) var(--sp-3);
+}
+h1 { font-size: var(--step-3); margin-block-start: 0; }
+h2 { font-size: var(--step-2); }
+h3 { font-size: var(--step-1); }
+
+/* Paragraph spacing 1.5em, per the skill. */
+p, ul, ol { margin-block: 0 1.5em; }
+li { margin-block-end: var(--sp-2); }
+
+.standfirst {
+  font-family: var(--font-sans);
+  font-size: var(--step-1);
+  line-height: 1.4;
+  color: var(--text-secondary);
+  margin-block-end: var(--sp-8);
+}
+
+a { color: var(--link); text-underline-offset: 0.15em; }
+a:hover { text-decoration-thickness: 2px; }
+/* Focus ring is meaningful non-text, so it uses rule-strong (>= 3:1), never rule. */
+a:focus-visible {
+  outline: 2px solid var(--rule-strong);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  background: var(--surface-alt);
+  padding: 0.1em 0.35em;
+  border-radius: 3px;
+}
+
+/* Code: mono, one step down, tinted background, rule-strong LEFT border. */
+pre {
+  background: var(--surface-alt);
+  border-inline-start: 3px solid var(--rule-strong);
+  border-radius: 0 4px 4px 0;
+  padding: var(--sp-4);
+  overflow-x: auto;
+  font-size: var(--step--1);
+  line-height: 1.38;
+  margin-block: 0 var(--sp-6);
+}
+pre code { background: none; padding: 0; font-size: 1em; }
+
+/* One rule-strong line under the header, rule hairlines between rows, NO vertical rules, and
+   no zebra striping -- candidate tints compute to ~1.1:1 and do nothing. */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-block: 0 var(--sp-6);
+  font-family: var(--font-sans);
+  font-size: var(--step--1);
+  line-height: 1.38;
+}
+th, td {
+  text-align: left;
+  padding: var(--sp-2) var(--sp-3);
+  vertical-align: top;
+}
+th {
+  font-weight: 600;
+  border-bottom: 2px solid var(--rule-strong);
+}
+td { border-bottom: 1px solid var(--rule); }
+
+blockquote {
+  margin: 0 0 var(--sp-6);
+  padding-inline-start: var(--sp-4);
+  border-inline-start: 3px solid var(--rule);
+  color: var(--text-secondary);
+}
+
+footer.site {
+  border-top: 1px solid var(--rule);
+  padding-block: var(--sp-6) var(--sp-12);
+  color: var(--text-muted);
+  font-family: var(--font-sans);
+  font-size: var(--step--1);
+}
+
+.note {
+  background: var(--surface-alt);
+  border-inline-start: 3px solid var(--rule-strong);
+  border-radius: 0 4px 4px 0;
+  padding: var(--sp-4);
+  margin-block-end: var(--sp-6);
+  font-size: var(--step--1);
+  line-height: 1.45;
+  color: var(--text-secondary);
+}
+.note > :last-child { margin-block-end: 0; }
+
+/* One content-driven breakpoint, ~700px. */
+@media (max-width: 700px) {
+  main { padding-block: var(--sp-8) var(--sp-16); }
+  h1 { font-size: var(--step-2); }
+  h2 { font-size: var(--step-1); }
+
+  /* Let code wrap on narrow screens instead of scrolling sideways. Measured at a 320px viewport
+     (WCAG 1.4.10's literal width): the JSON block overflowed its own box by 36px, so a phone
+     reader got a horizontal scrollbar inside the page. That is NOT a 1.4.10 failure -- the
+     document scrolls vertically only and `overflow-x: auto` is the sanctioned pattern -- but a
+     sideways scroll on a phone is a needless cost when the content is JSON, where the line breaks
+     are cosmetic rather than semantic. `overflow-x: auto` stays for anything that still exceeds
+     the box. Verified by scripts/site-a11y-render.mjs. */
+  pre { white-space: pre-wrap; word-break: break-word; }
+}
+
+/* ---- Keel site additions -------------------------------------------------------------------
+   NO NEW HEX VALUES. Every rule below reuses a token whose contrast ratio was already computed
+   with the WCAG relative-luminance formula and recorded at the top of this file. Introducing a
+   new colour would mean recomputing, and `web-design-system` is explicit that a remembered ratio
+   is not a measured one. Verified end-to-end by scripts/site-a11y-render.mjs, which re-derives
+   every ratio from getComputedStyle rather than from these declarations.
+   -------------------------------------------------------------------------------------------- */
+
+/* Skip link: first element in the document, invisible until focused. `display: none` would take it
+   out of the tab order and defeat the point.
+
+   Hidden with the 1px + clip-path technique, NOT the legacy `left: -9999px`. Two reasons, and the
+   first was measured here rather than recalled: the a11y render gate flagged the -9999px version
+   on all six pages as an element sitting past the viewport edge, because that is exactly what it
+   is. It was a false alarm about reflow and a true observation about the CSS. Parking content far
+   off-canvas also creates a horizontal scroll region in right-to-left writing modes. Staying 1px
+   and clipped keeps the link in the flow, focusable, and invisible. */
+.skip {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  color: var(--link);
+  font-family: var(--font-sans);
+  z-index: 10;
+  /* NO border while hidden. With the global `box-sizing: border-box`, a 2px border floors the
+     border box at 4px however small `width` is set -- so the element is not really 1x1 and the
+     render gate rightly kept flagging it. Borders belong in the focused state. */
+}
+.skip:focus {
+  width: auto;
+  height: auto;
+  overflow: visible;
+  clip-path: none;
+  background: var(--surface);
+  border: 2px solid var(--rule-strong);
+  border-radius: 0 0 4px 0;
+  padding: var(--sp-3) var(--sp-4);
+}
+
+/* Current page in the nav. Weight and an underline, never colour alone -- SC 1.4.1. */
+header.site nav a[aria-current="page"] {
+  font-weight: 700;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.2em;
+}
+
+/* Eyebrow above the H1. Sits in the hero slot; `web-page-anatomy` caps it at ten words. */
+.eyebrow {
+  font-family: var(--font-sans);
+  font-size: var(--step--1);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-block: 0 var(--sp-3);
+}
+
+/* Confidence tag, shown at the POINT OF LISTING so a reader never has to hunt for whether an item
+   is measured or asserted. Text on --surface (not --surface-alt) deliberately: the recorded ratios
+   at the top of this file are all against --surface, so a tinted background would invalidate them
+   and require a fresh computation for no visual gain. The border carries the shape instead. */
+.tag {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: var(--step--1);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  border: 1px solid var(--rule-strong);
+  border-radius: 3px;
+  padding: 0.1em 0.45em;
+  margin-inline-end: var(--sp-1);
+  white-space: nowrap;
+}
+
+/* Footer carries the nav again plus the sitemap -- the sitemap is the independent second way
+   WCAG 2.4.5 asks for, since repeating the header nav is the same path twice. */
+footer.site nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2) var(--sp-6);
+  margin-block-end: var(--sp-4);
+}
+footer.site p { margin-block: 0 var(--sp-2); }
+footer.site .updated { color: var(--text-muted); }
+
+blockquote p:last-child { margin-block-end: 0; }
+
+/* ---- Marketing page: hero, call to action, figures ------------------------------------------
+   Still NO NEW HEX. The button reuses --accent for its fill and --surface for its label, which
+   works in BOTH colour schemes for free: light mode puts near-white #FBF9F5 on dark green #0F5C3F
+   (7.61:1), dark mode puts near-black #121212 on light green #4FB286 (7.18:1). Both clear AAA, and
+   scripts/site-a11y-render.mjs re-derives them from getComputedStyle rather than trusting this
+   comment.
+
+   The accent is spent on the ONE thing the page wants a visitor to do -- `web-design-system` is
+   explicit that the single saturated colour goes to function, never decoration.
+   -------------------------------------------------------------------------------------------- */
+
+.hero { margin-block-end: var(--sp-12); }
+
+/* Two columns only where there is room for them. Below this the image stacks under the text
+   rather than shrinking into uselessness beside it. */
+@media (min-width: 900px) {
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--sp-8);
+    align-items: center;
+  }
+  .hero > figure { margin-block: 0; }
+}
+
+/* The call to action. NN/g measures 57% of viewing time above the fold -- its own 2018 correction
+   of the 80% figure that still circulates -- so this sits in the hero, and repeats once at the
+   foot of the page for the 43% who scrolled. */
+.cta {
+  display: inline-block;
+  background: var(--accent);
+  color: var(--surface);
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: var(--step-0);
+  text-decoration: none;
+  padding: var(--sp-3) var(--sp-6);
+  border-radius: 4px;
+  /* 2.5.8 Target Size wants >=24x24 CSS px; this is far past it, but state the intent. */
+  min-height: 44px;
+  line-height: 1.5;
+}
+.cta:hover { text-decoration: underline; text-decoration-thickness: 2px; }
+.cta:focus-visible { outline: 3px solid var(--text-primary); outline-offset: 3px; }
+.cta-note {
+  font-family: var(--font-sans);
+  font-size: var(--step--1);
+  color: var(--text-muted);
+  margin-block: var(--sp-3) 0;
+}
+
+/* Real product screenshots, never stock imagery: NN/g eyetracking found decorative and stock
+   photos are "completely ignored" while real product images get actively studied. Every figure
+   here is a screenshot of the actual app. */
+figure {
+  margin: 0 0 var(--sp-8);
+}
+figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--rule-strong);
+  border-radius: 6px;
+}
+figcaption {
+  font-family: var(--font-sans);
+  font-size: var(--step--1);
+  line-height: 1.4;
+  color: var(--text-muted);
+  margin-block-start: var(--sp-2);
+}

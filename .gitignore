@@ -1,0 +1,5 @@
+_site/
+.bundle-gems/
+.bundle/
+Gemfile.lock
+.jekyll-cache/
