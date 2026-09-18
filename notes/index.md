@@ -7,9 +7,8 @@ section: notes
 description: Measured notes on Shopify platform behaviour, from building and shipping a Shopify app — including where the documentation and the API disagree.
 ---
 
-These cost real time. None of them turned up by reading the documentation, because in one case the
-documentation is wrong — it says two cart fields are the same field, and on a live cart they came
-back $120 apart.
+These cost real time. None came from reading the docs. In one case the docs are just wrong: they
+call two cart fields the same field, and on a live cart those two fields came back $120 apart.
 
 ## For developers
 
