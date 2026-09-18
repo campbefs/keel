@@ -12,6 +12,38 @@
     explicit that this site is the case where baseurl is REQUIRED.
   {%- endcomment -%}
   <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+  {%- if page.app_schema -%}
+  {%- comment -%}
+    SoftwareApplication tells a search engine what this is and what it costs, which jekyll-seo-tag's
+    generic WebSite type cannot. Emitted only on pages that opt in via front matter.
+
+    DELIBERATELY NO aggregateRating OR review: Giftline has no reviews. Inventing them is the
+    fabrication `marketing-copy` refuses by name, and Google penalises review markup it cannot
+    verify. The offer is real and stated exactly as the App Store states it.
+  {%- endcomment -%}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Giftline",
+    "applicationCategory": "BusinessApplication",
+    "applicationSubCategory": "Shopify app",
+    "operatingSystem": "Shopify",
+    "url": "https://apps.shopify.com/keel-giftline",
+    "installUrl": "https://apps.shopify.com/keel-giftline",
+    "image": "{{ '/assets/img/social-card.png' | absolute_url }}",
+    "description": "Adds a free gift to a Shopify cart when the total passes a threshold the merchant sets, and removes the gift again if the cart drops back under. The threshold is counted after discounts.",
+    "offers": {
+      "@type": "Offer",
+      "price": "19.00",
+      "priceCurrency": "USD",
+      "url": "https://apps.shopify.com/keel-giftline",
+      "availability": "https://schema.org/InStock"
+    },
+    "publisher": { "@type": "Organization", "name": "Keel", "url": "{{ '/' | absolute_url }}" }
+  }
+  </script>
+  {%- endif -%}
 </head>
 <body>
   <!-- Skip link first in the document, per web-page-anatomy's navigation rule. -->

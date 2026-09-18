@@ -1,5 +1,6 @@
 ---
 layout: default
+app_schema: true
 title: Shopify free gift with purchase app
 description: Giftline automatically adds a free gift to the cart when a shopper reaches your threshold, counted after discounts, and removes it again if the cart drops below. $19 a month, 14 days free, no theme edits.
 ---

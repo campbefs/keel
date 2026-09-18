@@ -1,5 +1,6 @@
 ---
 layout: default
+app_schema: true
 title: Giftline
 permalink: /apps/giftline/
 section: apps
